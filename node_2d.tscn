@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6bf62ujvyblk"]
+
+[ext_resource type="Texture2D" uid="uid://dk8t45w6p6b8i" path="res://estrada.png" id="1_0e48y"]
+[ext_resource type="Script" uid="uid://f43vyjmjdmbt" path="res://player_movement.gd" id="2_0hol4"]
+[ext_resource type="Texture2D" uid="uid://n7777h3cudfb" path="res://seta.png" id="2_epypp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0hol4"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Cenário" type="Node" parent="."]
+
+[node name="Estrada" type="Sprite2D" parent="Cenário"]
+position = Vector2(576.5, 324)
+scale = Vector2(0.600521, 0.6)
+texture = ExtResource("1_0e48y")
+
+[node name="Jogador" type="Node" parent="."]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Jogador"]
+position = Vector2(163, 606)
+script = ExtResource("2_0hol4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Jogador/CharacterBody2D"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_0hol4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Jogador/CharacterBody2D"]
+position = Vector2(1, 0)
+texture = ExtResource("2_epypp")
