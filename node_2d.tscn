@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://c6bf62ujvyblk"]
 
-[ext_resource type="Texture2D" uid="uid://dk8t45w6p6b8i" path="res://estrada.png" id="1_0e48y"]
+[ext_resource type="Texture2D" uid="uid://dk8t45w6p6b8i" path="res://assets/estrada.png" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://f43vyjmjdmbt" path="res://player_movement.gd" id="2_0hol4"]
-[ext_resource type="Texture2D" uid="uid://n7777h3cudfb" path="res://seta.png" id="2_epypp"]
+[ext_resource type="Texture2D" uid="uid://n7777h3cudfb" path="res://assets/seta.png" id="2_epypp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0hol4"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Main" type="Node2D"]
 
 [node name="Cenário" type="Node" parent="."]
 
