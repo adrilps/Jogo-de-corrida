@@ -23,6 +23,7 @@ script = ExtResource("2_0hol4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Jogador/CharacterBody2D"]
 position = Vector2(0.5, 0.5)
+rotation = 0.118682
 shape = SubResource("CircleShape2D_0hol4")
 
 [node name="Sprite2D" type="Sprite2D" parent="Jogador/CharacterBody2D"]
