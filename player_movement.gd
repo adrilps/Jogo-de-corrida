@@ -3,14 +3,24 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const ACCELERATION = 5.0
-const FRICTION = 2.5
+const FRICTION = 2
 const JUMP_VELOCITY = -400.0
+var rotational_velocity = 0
 
 
 
 func _physics_process(delta: float) -> void:
 	
-	#var float absolute_velocity = (abs(velocity.x)+abs(velocity.y))
+	var absolute_velocity: float = (abs(velocity.x)+abs(velocity.y))
+	
+	
+	if(rotation == 0 ):
+		pass
+	elif(rotation < 0):
+		rotation += FRICTION
+	elif(rotation > 0):
+		rotation -= FRICTION
+	
 	# Add the gravity.
 	#if not is_on_floor():
 	#	velocity += get_gravity() * delta
@@ -37,17 +47,17 @@ func _physics_process(delta: float) -> void:
 		if((abs(velocity.x)+abs(velocity.y))== 0):
 			pass
 		else :
-			rotation += 0.05* ((abs(velocity.x)+abs(velocity.y))/250)
+			rotation += 0.005 * (absolute_velocity/250)
 		
 	if Input.is_action_pressed("Steer Right"):
 		if((abs(velocity.x)+abs(velocity.y))== 0):
 			pass
 		else :
-			rotation -= 0.05* ((abs(velocity.x)+abs(velocity.y))/250)
+			rotation -= 0.005* ((abs(velocity.x)+abs(velocity.y))/250)
 	
 	if Input.is_action_pressed("Brake"):
-		velocity.x -= 0.15*ACCELERATION*cos(rotation)
-		velocity.y -= 0.15*ACCELERATION*sin(rotation)
+		velocity.x -= 0.6*ACCELERATION*cos(rotation)
+		velocity.y -= 0.6*ACCELERATION*sin(rotation)
 		
 		
 	# Handle jump.
