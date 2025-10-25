@@ -1,97 +1,111 @@
 extends CharacterBody2D
 
-@export var friction = -55  # The friction coefficient that slows down the car
-@export var friction_brake_factor = 2.0
-@export var drag = -0.06  # Air drag coefficient that also slows down the car
-@export var slip_speed = 400  # Speed above which the car's traction decreases (for drifting)
+@export var friction = -55  # Coeficiente de fricção que afeta negativamente a aceleração do veículo
+@export var friction_brake_factor = 2.0 #Multiplicador de fricção do freio
+@export var drag = -0.06  # Coeficiente de resistência do ar
+@export var slip_speed = 400  # Limiar de velocidade para troca de coeficiente de fricção
 
 @export var steering_angle = 25  # Ângulo máximo das rodas
-@export var engine_power = 500  # How much force the engine can apply for acceleration
-@export var reverse_speed = -450  # Braking power when the brake input is applied
-@export var max_speed_reverse = 250  # Maximum speed limit in reverse
+@export var engine_power = 500  # Força máxima que o motor converte em aceleração
+@export var reverse_speed = -450  # Força máxima de frenagem/ré
+@export var max_speed_reverse = 250  # Limite superior da velocidade de ré
 
-@export var traction_fast = 2.5  # Traction factor when the car is moving fast (affects control)
-@export var traction_slow = 10  # Traction factor when the car is moving slow (affects control)
-@export var traction_brake = 0.2
+@export var traction_fast = 2.5  # Fator de tração em alta velocidade
+@export var traction_slow = 10  # Fator de tração em baixa velocidade
+@export var traction_brake = 0.2 # Fator de tração quando freando
+@export var traction_slipping = 0.05 # Fator de tração quando escorregando
 
-var wheel_base = 65  # Distance between the front and back axle of the car
-var acceleration = Vector2.ZERO  # Current acceleration vector
-var steer_direction  # Current direction of steering
-var is_drifting = false
+var wheel_base = 65  # Distância entre o eixo frontal e traseiro do carro
+var acceleration = Vector2.ZERO  # Vetor de acceleração atual
+var steer_direction  # Direção atual das rodas 
+var is_drifting = false #Indicador de derrapagem
+var is_slipping = false #Indicador de deslizamento
 
 func _physics_process(delta: float) -> void:
 	acceleration = Vector2.ZERO
-	get_input()  # Take input from player
-	calculate_steering(delta)  # Apply turning logic based on steering
+	get_input()  # Recebe entrada do jogador
+	calculate_steering(delta)  # Aplica lógica de direção às entradas do jogador
 	
-	apply_friction(delta)  # Apply friction forces to the car
-	velocity += acceleration * delta  # Apply the resulting acceleration to the velocity
-	move_and_slide()  # Move the car and handle collisions
+	apply_friction(delta)  # Aplica forças retardantes ao veículo
+	velocity += acceleration * delta  # Aplica a aceleração resultante à velocidade do veículo
+	move_and_slide()  # Chama o motor de física
 	
 
-#function to handle input from the user and apply effects to the car's movement
+# Função de tratamento de entrada do usuário
 func get_input():
-	# Get steering input and translate it to an angle
+	# Traduz entradas de direção em ângulos
 	var turn = Input.get_axis("steer_right", "steer_left")
 	steer_direction = turn * deg_to_rad(steering_angle)
 
-	# If accelerate is pressed, apply engine power to the car's forward direction
+	# Aplica a a força total do motor quando movendo para frente
 	if Input.is_action_pressed("move_forward"):
 		acceleration = transform.x * engine_power
 
-	# If brake is pressed, apply braking force
+	# Aplica aceleração negativa quando movendo para trás
 	if Input.is_action_pressed("move_backward"):
 		acceleration = transform.x * reverse_speed
 	
+	# Ativa o indicador de derrapagem ao frear
 	is_drifting = false
 	if Input.is_action_pressed("brake"):
 		is_drifting = true
 
-#Function to apply friction forces to the car, making it 'slide' to a halt
+# Função para cálculo de forças retardantes
 func apply_friction(delta):
-	# If there is no input and speed is very low, just stop to prevent endless sliding
+	# Arredonda a velocidade a zero para evitar rebotes infinitos 
 	if acceleration == Vector2.ZERO and velocity.length() < 30:
 		velocity = Vector2.ZERO
-	# Calculate friction force and air drag based on current velocity, and apply it
+	# Calcula fricção e resistência do ar, baseadas na velocidade atual
 	var friction_force = velocity * friction * delta
 	var drag_force = velocity * velocity.length() * drag * delta
 	
+	# Multiplica as forças resistivas caso o indicador de derrapagem estiver ativo
 	if is_drifting:
 		friction_force *= friction_brake_factor
 		drag_force *= friction_brake_factor
 	
-	# Add the forces to the acceleration
+	# Acrescenta as forças resistivas à aceleração atual
 	acceleration += drag_force + friction_force
 
 	
-# Function to calculate the steering effect
+# Função de cálculo de direção
 func calculate_steering(delta):
-	# Calculate the positions of the rear and front wheel
+	# Calcula a posição do eixo frontal e traseiro
 	var rear_wheel = position - transform.x * wheel_base / 2.0
 	var front_wheel = position + transform.x * wheel_base / 2.0
-	# Advance the wheels' positions based on the current velocity, applying rotation to the front wheel
+	# Altera a posição das rodas, baseada na velocidade atual e rotaciona as rodas frontais
 	rear_wheel += velocity * delta
 	front_wheel += velocity.rotated(steer_direction) * delta
-	# Calculate the new heading based on the wheels' positions
+	# Calcula a direção real do veículo, baseada no vetor entre o eixo traseiro e frontal
 	var new_heading = rear_wheel.direction_to(front_wheel)
 
-	# Choose the traction model based on the current speed
+	# Escolha do cálculo de tração
 	var traction = traction_slow
+	if is_slipping:
+		traction = traction_slipping
 	if velocity.length() > slip_speed:
 		traction = traction_fast
 	if is_drifting and velocity.length() > slip_speed / 2.0:
 		traction = traction_brake
 
-	# Dot product represents how aligned the new heading is with the current velocity direction
+	# Dot product resulta na diferença entre a direção da trajetória do carro e a direção da sua velocidade
 	var d = new_heading.dot(velocity.normalized())
 
-	# If not braking (d > 0), adjust the car velocity smoothly towards the new heading
+	# Caso não esteja freando (d > 0), ajusta gradativamente a direção de sua velocidade rumo à direção da trajetória
 	if d > 0:
 		velocity = lerp(velocity, new_heading * velocity.length(), traction * delta)
 
-	# If braking (d < 0), reverse the direction and limit the speed
+	#Caso esteja freando / dando ré (d < 0), inverte a direção e limita a velocidade máxima
 	if d < 0:
 		velocity = -new_heading * min(velocity.length(), max_speed_reverse)
 
-	# Update the car's rotation to face in the direction of the new heading
+	# Atualiza a rotação do objeto em relação ao novo ângulo de direção
 	rotation = new_heading.angle()
+	
+	# Função que aplica efeito de perda de controle no veículo, chamado externamente
+func apply_debuff():
+		# Ativa o indicador de deslizamento por 1.5 segundos para cálculo de fricção
+		is_slipping = true
+		await get_tree().create_timer(1.5).timeout
+		is_slipping = false
+	

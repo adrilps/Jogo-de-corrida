@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n7777h3cudfb"
-path="res://.godot/imported/seta.png-fb8911e6f7dba730e25ab7c53c298759.ctex"
+uid="uid://bvidwpvsnt8ui"
+path="res://.godot/imported/spludge.png-9313acd239fd0c66034d768c5a469125.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/seta.png"
-dest_files=["res://.godot/imported/seta.png-fb8911e6f7dba730e25ab7c53c298759.ctex"]
+source_file="res://assets/spludge.png"
+dest_files=["res://.godot/imported/spludge.png-9313acd239fd0c66034d768c5a469125.ctex"]
 
 [params]
 

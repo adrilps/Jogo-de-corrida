@@ -5,10 +5,17 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0hol4"]
 
-[node name="Jogador" type="CharacterBody2D"]
+[node name="Jogador" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_c2wt1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+rotation = 0.118682
+shape = SubResource("CircleShape2D_0hol4")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0.5, 0.5)
 rotation = 0.118682
 shape = SubResource("CircleShape2D_0hol4")
