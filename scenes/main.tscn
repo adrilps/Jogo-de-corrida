@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6bf62ujvyblk"]
+
+[ext_resource type="PackedScene" uid="uid://bruq7e588b0k4" path="res://scenes/jogador.tscn" id="1_sugp2"]
+[ext_resource type="Texture2D" uid="uid://dk8t45w6p6b8i" path="res://assets/estrada.png" id="2_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://cx7ueuai5gsoo" path="res://scenes/spludge.tscn" id="3_tbgi4"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Jogador" parent="." instance=ExtResource("1_sugp2")]
+z_index = 1
+position = Vector2(145, 599)
+
+[node name="Background" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+position = Vector2(576.5, 324)
+scale = Vector2(0.600521, 0.6)
+texture = ExtResource("2_jyhfs")
+
+[node name="Spludge" parent="." instance=ExtResource("3_tbgi4")]
+position = Vector2(168, 391)
