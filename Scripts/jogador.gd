@@ -20,6 +20,8 @@ var acceleration = Vector2.ZERO  # Vetor de acceleração atual
 var steer_direction  # Direção atual das rodas 
 var is_drifting = false #Indicador de derrapagem
 var is_slipping = false #Indicador de deslizamento
+var terrain_friction_multiplier = 1
+var terrain_traction_multiplier = 1
 
 func _physics_process(delta: float) -> void:
 	acceleration = Vector2.ZERO
@@ -56,13 +58,13 @@ func apply_friction(delta):
 	if acceleration == Vector2.ZERO and velocity.length() < 30:
 		velocity = Vector2.ZERO
 	# Calcula fricção e resistência do ar, baseadas na velocidade atual
-	var friction_force = velocity * friction * delta
+	var friction_force = velocity * friction * terrain_friction_multiplier * delta
 	var drag_force = velocity * velocity.length() * drag * delta
 	
 	# Multiplica as forças resistivas caso o indicador de derrapagem estiver ativo
 	if is_drifting:
 		friction_force *= friction_brake_factor
-		drag_force *= friction_brake_factor
+		drag_force *= friction_brake_factor 
 	
 	# Acrescenta as forças resistivas à aceleração atual
 	acceleration += drag_force + friction_force
@@ -87,6 +89,8 @@ func calculate_steering(delta):
 		traction = traction_fast
 	if is_drifting and velocity.length() > slip_speed / 2.0:
 		traction = traction_brake
+		
+	traction *= terrain_traction_multiplier
 
 	# Dot product resulta na diferença entre a direção da trajetória do carro e a direção da sua velocidade
 	var d = new_heading.dot(velocity.normalized())
@@ -108,4 +112,12 @@ func apply_debuff():
 		is_slipping = true
 		await get_tree().create_timer(1.5).timeout
 		is_slipping = false
+		
+func set_traction(traction_factor):
+	terrain_traction_multiplier = traction_factor
+	print("traction updated")
+	
+func set_friction(friction_factor):
+	terrain_friction_multiplier = friction_factor
+	print("friction updated")
 	

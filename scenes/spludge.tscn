@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cx7ueuai5gsoo"]
 
 [ext_resource type="Texture2D" uid="uid://bvidwpvsnt8ui" path="res://assets/spludge.png" id="1_sswv4"]
-[ext_resource type="Script" uid="uid://c1csc5j5oas2v" path="res://spludge.gd" id="2_4rt51"]
+[ext_resource type="Script" uid="uid://c1csc5j5oas2v" path="res://Scripts/spludge.gd" id="2_4rt51"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jj574"]
 size = Vector2(50.6875, 50.9375)
