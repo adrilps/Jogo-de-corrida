@@ -1,11 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://c6bf62ujvyblk"]
 
-[ext_resource type="Script" uid="uid://3mkx6mt6q7n8" path="res://scenes/main.gd" id="1_jyhfs"]
+[ext_resource type="Script" uid="uid://3mkx6mt6q7n8" path="res://Scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://bruq7e588b0k4" path="res://scenes/jogador.tscn" id="1_sugp2"]
 [ext_resource type="Texture2D" uid="uid://dp0l3305sfrxw" path="res://assets/rua.png" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cx7ueuai5gsoo" path="res://scenes/spludge.tscn" id="3_tbgi4"]
-[ext_resource type="Script" uid="uid://cqv83qcweqfv6" path="res://scenes/grass.gd" id="5_tbgi4"]
-[ext_resource type="Script" uid="uid://ntkmdw5lvk46" path="res://scenes/street.gd" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://cqv83qcweqfv6" path="res://Scripts/grass.gd" id="5_tbgi4"]
+[ext_resource type="Script" uid="uid://ntkmdw5lvk46" path="res://Scripts/street.gd" id="6_tefeu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6xl0"]
 size = Vector2(1424, 671)
