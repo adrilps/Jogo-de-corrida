@@ -1,38 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6bf62ujvyblk"]
+[gd_scene load_steps=5 format=3 uid="uid://c6bf62ujvyblk"]
 
 [ext_resource type="Script" uid="uid://3mkx6mt6q7n8" path="res://Scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://bruq7e588b0k4" path="res://scenes/jogador.tscn" id="1_sugp2"]
 [ext_resource type="Texture2D" uid="uid://dp0l3305sfrxw" path="res://assets/rua.png" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cx7ueuai5gsoo" path="res://scenes/spludge.tscn" id="3_tbgi4"]
-[ext_resource type="Script" uid="uid://cqv83qcweqfv6" path="res://Scripts/grass.gd" id="5_tbgi4"]
-[ext_resource type="Script" uid="uid://ntkmdw5lvk46" path="res://Scripts/street.gd" id="6_tefeu"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6xl0"]
-size = Vector2(1424, 671)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
-size = Vector2(1686, 54.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tbgi4"]
-size = Vector2(109, 1077)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tefeu"]
-size = Vector2(112.25, 863)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
-size = Vector2(1801.5, 88.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_85g3d"]
-size = Vector2(118.5, 808.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_choun"]
-size = Vector2(1807.5, 118)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ya4ey"]
-size = Vector2(1566, 138.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_eb6dy"]
-size = Vector2(134, 666.5)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jyhfs")
@@ -56,52 +27,3 @@ metadata/_edit_lock_ = true
 
 [node name="Spludge" parent="." instance=ExtResource("3_tbgi4")]
 position = Vector2(-825, 153)
-
-[node name="Grass" type="Node2D" parent="."]
-script = ExtResource("5_tbgi4")
-
-[node name="GrassArea" type="Area2D" parent="Grass"]
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Grass/GrassArea"]
-position = Vector2(-10, 9.5)
-shape = SubResource("RectangleShape2D_o6xl0")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Grass/GrassArea"]
-position = Vector2(1, 513.75)
-shape = SubResource("RectangleShape2D_jyhfs")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grass/GrassArea"]
-position = Vector2(-903.5, 0.5)
-shape = SubResource("RectangleShape2D_tbgi4")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Grass/GrassArea"]
-position = Vector2(905.125, 109.5)
-shape = SubResource("RectangleShape2D_tefeu")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Grass/GrassArea"]
-position = Vector2(59.25, -493.25)
-shape = SubResource("RectangleShape2D_tipki")
-
-[node name="Street" type="Node2D" parent="."]
-script = ExtResource("6_tefeu")
-
-[node name="StreetArea" type="Area2D" parent="Street"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Street/StreetArea"]
-position = Vector2(-784.25, 77.75)
-shape = SubResource("RectangleShape2D_85g3d")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Street/StreetArea"]
-position = Vector2(55.25, -388)
-shape = SubResource("RectangleShape2D_choun")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Street/StreetArea"]
-position = Vector2(63, 414.75)
-shape = SubResource("RectangleShape2D_ya4ey")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Street/StreetArea"]
-position = Vector2(779, 6.75)
-shape = SubResource("RectangleShape2D_eb6dy")
-
-[connection signal="area_entered" from="Grass/GrassArea" to="Grass" method="_on_grass_area_entered"]
-[connection signal="area_entered" from="Street/StreetArea" to="Street" method="_on_street_area_entered"]

@@ -115,9 +115,11 @@ func apply_debuff():
 		
 func set_traction(traction_factor):
 	terrain_traction_multiplier = traction_factor
-	print("traction updated")
 	
 func set_friction(friction_factor):
 	terrain_friction_multiplier = friction_factor
-	print("friction updated")
+
+# posição global da roda da frente
+func get_front_wheel_gpos() -> Vector2:
+	return global_position + transform.x * (wheel_base / 2.0)
 	
