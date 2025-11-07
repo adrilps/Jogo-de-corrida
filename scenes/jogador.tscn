@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bruq7e588b0k4"]
 
 [ext_resource type="Script" uid="uid://f43vyjmjdmbt" path="res://Scripts/jogador.gd" id="1_c2wt1"]
-[ext_resource type="Texture2D" uid="uid://n7777h3cudfb" path="res://assets/seta.png" id="2_q2130"]
+[ext_resource type="Texture2D" uid="uid://cqv85s27tcadk" path="res://assets/carro.png" id="2_uahlj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0hol4"]
 
@@ -21,5 +21,6 @@ rotation = 0.118682
 shape = SubResource("CircleShape2D_0hol4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, 0)
-texture = ExtResource("2_q2130")
+position = Vector2(0, -1)
+scale = Vector2(1.55, 1.59)
+texture = ExtResource("2_uahlj")
