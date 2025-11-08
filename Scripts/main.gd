@@ -1,13 +1,15 @@
 extends Node2D
 
+@onready var jogador = $Jogador
 @onready var camera = $Jogador/Camera2D
 @onready var background = $Background
-@onready var jogador = $Jogador
+@onready var borders = $Borders
 
 var background_image: Image
 
 func _ready():
 	set_camera_limits()
+	create_borders()
 	if background.texture:
 		background_image = background.texture.get_image()
 
@@ -25,6 +27,35 @@ func set_camera_limits():
 	camera.limit_right = dimensions.x / 2.0
 	camera.limit_top = -dimensions.y / 2.0
 	camera.limit_bottom = dimensions.y / 2.0
+
+func create_borders():
+	var texture = background.texture
+	if not texture:
+		return
+	
+	var dimensions = texture.get_size() * background.scale
+	var half_width = dimensions.x / 2.0
+	var half_height = dimensions.y / 2.0
+	var thickness = 10.0
+	
+	var walls = [
+		[Vector2(0, -half_height - (thickness / 2.0)), Vector2(dimensions.x, thickness)],
+		[Vector2(0, half_height + (thickness / 2.0)), Vector2(dimensions.x, thickness)],
+		[Vector2(-half_width - (thickness / 2.0), 0), Vector2(thickness, dimensions.y)],
+		[Vector2(half_width + (thickness / 2.0), 0), Vector2(thickness, dimensions.y)]
+	]
+	
+	for def in walls:
+		var wall = StaticBody2D.new()
+		wall.position = def[0]
+		
+		var shape = CollisionShape2D.new()
+		var rect = RectangleShape2D.new()
+		rect.size = def[1]
+		shape.shape = rect
+		
+		wall.add_child(shape)
+		borders.add_child(wall)
 
 func check_terrain():
 	if not background_image:
