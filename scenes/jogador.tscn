@@ -3,24 +3,20 @@
 [ext_resource type="Script" uid="uid://f43vyjmjdmbt" path="res://Scripts/jogador.gd" id="1_c2wt1"]
 [ext_resource type="Texture2D" uid="uid://cqv85s27tcadk" path="res://assets/carro.png" id="2_uahlj"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0hol4"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uahlj"]
+radius = 21.64477
+height = 107.0
 
 [node name="Jogador" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_c2wt1")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0.5)
-rotation = 0.118682
-shape = SubResource("CircleShape2D_0hol4")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0.5, 0.5)
-rotation = 0.118682
-shape = SubResource("CircleShape2D_0hol4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
 scale = Vector2(1.55, 1.59)
 texture = ExtResource("2_uahlj")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7, -2)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_uahlj")

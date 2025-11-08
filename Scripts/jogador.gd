@@ -108,10 +108,10 @@ func calculate_steering(delta):
 	
 	# Função que aplica efeito de perda de controle no veículo, chamado externamente
 func apply_debuff():
-		# Ativa o indicador de deslizamento por 1.5 segundos para cálculo de fricção
-		is_slipping = true
-		await get_tree().create_timer(1.5).timeout
-		is_slipping = false
+	# Ativa o indicador de deslizamento por 1.5 segundos para cálculo de fricção
+	is_slipping = true
+	await get_tree().create_timer(1.5).timeout
+	is_slipping = false
 		
 func set_traction(traction_factor):
 	terrain_traction_multiplier = traction_factor

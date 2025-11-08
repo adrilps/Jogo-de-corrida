@@ -49,10 +49,8 @@ func check_terrain():
 	
 	# grama é verde então checamos se G é mais forte q R e B
 	if color.g > color.r and color.g > color.b:
-		print("grama")
 		jogador.set_friction(3.0)
 		jogador.set_traction(2.0)
 	else:
-		print("rua")
 		jogador.set_friction(0.5)
 		jogador.set_traction(2.0)
