@@ -37,7 +37,6 @@ traction_fast = null
 traction_slow = null
 traction_brake = null
 traction_slipping = null
-initial_state = null
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = -965
