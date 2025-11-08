@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var jogador = $Jogador
-@onready var camera = $Jogador/Camera2D
+@onready var jogador = $Player
+@onready var camera = $Player/Camera2D
 @onready var background = $Background
 @onready var borders = $Borders
 

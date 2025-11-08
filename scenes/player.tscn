@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=3 uid="uid://bruq7e588b0k4"]
+
+[ext_resource type="Script" uid="uid://f43vyjmjdmbt" path="res://Scripts/player/player.gd" id="1_c2wt1"]
+[ext_resource type="Texture2D" uid="uid://cqv85s27tcadk" path="res://assets/carro.png" id="2_uahlj"]
+[ext_resource type="Script" uid="uid://bqvvdnkjuigem" path="res://Scripts/player/idle_state.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://o87cehbi4c2i" path="res://Scripts/player/accelerate_state.gd" id="4_qlg0r"]
+[ext_resource type="Script" uid="uid://dad403nppgul8" path="res://Scripts/player/reverse_state.gd" id="5_tuyoq"]
+[ext_resource type="Script" uid="uid://dtq40fiqu2qkv" path="res://Scripts/player/drift_state.gd" id="6_tuyoq"]
+[ext_resource type="Script" uid="uid://dk00t7p1tbw3t" path="res://Scripts/player/slip_state.gd" id="7_fjrip"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uahlj"]
+radius = 21.64477
+height = 107.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_c2wt1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(1.55, 1.59)
+texture = ExtResource("2_uahlj")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7, -2)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_uahlj")
+
+[node name="StateMachine" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_qhqgy")
+
+[node name="Accelerate" type="Node" parent="StateMachine"]
+script = ExtResource("4_qlg0r")
+
+[node name="Reverse" type="Node" parent="StateMachine"]
+script = ExtResource("5_tuyoq")
+
+[node name="Drift" type="Node" parent="StateMachine"]
+script = ExtResource("6_tuyoq")
+
+[node name="Slip" type="Node" parent="StateMachine"]
+script = ExtResource("7_fjrip")
