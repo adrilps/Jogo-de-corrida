@@ -1,1 +1,0 @@
-Tutorial de referência para criação da movimentação de jogador: https://www.youtube.com/watch?v=V8NhEEnoEdk (Create a Top-Down Character & Car Controller - por Red Indie Games)
