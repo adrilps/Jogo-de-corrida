@@ -67,7 +67,7 @@ func _physics_process(delta: float) -> void:
 	
 	velocity += acceleration * delta  # Aplica a aceleração resultante à velocidade do veículo
 	move_and_slide()  # Chama o motor de física
-	print(current_fuel)
+	print(current_fuel, current_state)
 
 func change_state(new_state: String):
 	if current_state.name == "Empty":
@@ -123,6 +123,13 @@ func apply_forces(delta):
 	# Função que aplica efeito de perda de controle no veículo, chamado externamente
 func apply_debuff():
 	change_state("Slip")
+
+func refuel(amount: float):
+	current_fuel = clamp(current_fuel + amount, 0, max_fuel)
+	if current_state.name == "Empty":
+		current_state.exit()
+		current_state = state_machine.get_node("Idle")
+		current_state.enter()
 
 func set_traction(traction_factor):
 	terrain_traction_multiplier = traction_factor
