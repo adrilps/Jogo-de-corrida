@@ -18,6 +18,11 @@ class_name Player extends CharacterBody2D
 @export var traction_brake: float = 0.2 # Fator de tração quando freando
 @export var traction_slipping: float = 0.05 # Fator de tração quando escorregando
 
+@export var max_fuel: float = 100.0
+@export var fuel_rate: float = 2.0
+@export var low_fuel_threshold: float = 15.0
+@export var low_fuel_speed_multiplier: float = 0.4
+
 var wheel_base = 65  # Distância entre o eixo frontal e traseiro do carro
 var acceleration = Vector2.ZERO  # Vetor de acceleração atual
 var steer_direction  # Direção atual das rodas 
@@ -26,6 +31,8 @@ var current_friction_mult = 1.0
 
 var terrain_friction_multiplier = 1
 var terrain_traction_multiplier = 1
+
+var current_fuel = max_fuel
 
 var current_state: State
 
@@ -45,17 +52,26 @@ func _physics_process(delta: float) -> void:
 	steer_direction = turn * deg_to_rad(steering_angle)
 	acceleration = Vector2.ZERO
 	
+	if current_fuel <= 0:
+		change_state("Empty")
+	
 	var new_state = current_state.process_state(delta)
 	if new_state:
 		change_state(new_state)
+	
+	if current_fuel < low_fuel_threshold and current_fuel > 0:
+		acceleration *= lerp(low_fuel_speed_multiplier, 1.0, current_fuel / low_fuel_threshold)
 	
 	apply_control(delta)
 	apply_forces(delta)
 	
 	velocity += acceleration * delta  # Aplica a aceleração resultante à velocidade do veículo
 	move_and_slide()  # Chama o motor de física
+	print(current_fuel)
 
 func change_state(new_state: String):
+	if current_state.name == "Empty":
+		return
 	if not state_machine.has_node(new_state):
 		push_warning("Estado não encontrado: %s" % new_state)
 		return
