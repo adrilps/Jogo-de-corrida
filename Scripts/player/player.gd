@@ -29,15 +29,7 @@ var terrain_traction_multiplier = 1
 
 var current_state: State
 
-var slip_timer: Timer
-
 func _ready():
-	slip_timer = Timer.new()
-	slip_timer.name = "SlipTimer"
-	slip_timer.wait_time = 1.5
-	slip_timer.one_shot = true
-	slip_timer.connect("timeout", _on_slip_timer_timeout)
-	add_child(slip_timer)
 	if initial_state == null:
 		push_error("Initial state not assigned")
 		return
@@ -115,10 +107,6 @@ func apply_forces(delta):
 	# Função que aplica efeito de perda de controle no veículo, chamado externamente
 func apply_debuff():
 	change_state("Slip")
-
-func _on_slip_timer_timeout():
-	if current_state.name == "Slip":
-		change_state("Idle")
 
 func set_traction(traction_factor):
 	terrain_traction_multiplier = traction_factor

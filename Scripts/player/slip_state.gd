@@ -1,7 +1,9 @@
 extends State
 
+@onready var timer = $Timer as Timer
+
 func enter():
-	player.slip_timer.start()
+	timer.start()
 
 func process_state(_delta) -> String:
 	player.acceleration = Vector2.ZERO
@@ -9,3 +11,7 @@ func process_state(_delta) -> String:
 	player.current_traction = player.traction_slipping
 	
 	return ""
+
+func _on_timer_timeout() -> void:
+	if player.current_state.name == "Slip":
+		player.change_state("Idle")
