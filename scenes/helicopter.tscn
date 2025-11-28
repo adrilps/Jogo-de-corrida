@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgkhe4i7b47hy"]
+
+[ext_resource type="Texture2D" uid="uid://budso8l71rmau" path="res://icon.svg" id="1_4loa8"]
+[ext_resource type="Script" uid="uid://cwexai5yjfwer" path="res://Scripts/helicopter.gd" id="1_xmuea"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xmuea"]
+radius = 58.21512
+
+[node name="Helicopter" type="CharacterBody2D"]
+z_index = 10
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_xmuea")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4loa8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xmuea")
