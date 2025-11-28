@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c5x3765l3tpd7"]
 
-[ext_resource type="Texture2D" uid="uid://budso8l71rmau" path="res://icon.svg" id="1_jpguu"]
 [ext_resource type="Script" uid="uid://3yy8gnj2arcb" path="res://Scripts/fuel_pickup.gd" id="1_ll145"]
+[ext_resource type="Texture2D" uid="uid://bjh3kdc8easdq" path="res://assets/combustivel.png" id="2_ll145"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jpguu"]
 size = Vector2(60, 60)
@@ -11,7 +11,7 @@ script = ExtResource("1_ll145")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_jpguu")
+texture = ExtResource("2_ll145")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)

@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://bhw317bgxs708" path="res://Scripts/player/empty_state.gd" id="7_smehm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uahlj"]
-radius = 21.64477
+radius = 21.6448
 height = 107.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
@@ -24,7 +24,7 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-7, -2)
-rotation = 1.5707964
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_uahlj")
 
 [node name="StateMachine" type="Node" parent="."]

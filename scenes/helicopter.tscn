@@ -1,19 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgkhe4i7b47hy"]
+[gd_scene load_steps=5 format=3 uid="uid://bgkhe4i7b47hy"]
 
-[ext_resource type="Texture2D" uid="uid://budso8l71rmau" path="res://icon.svg" id="1_4loa8"]
 [ext_resource type="Script" uid="uid://cwexai5yjfwer" path="res://Scripts/helicopter.gd" id="1_xmuea"]
+[ext_resource type="PackedScene" uid="uid://dlh1xcl7vllcn" path="res://scenes/missile.tscn" id="2_wncid"]
+[ext_resource type="Texture2D" uid="uid://krvis60k8x17" path="res://assets/helicoptero.png" id="3_wncid"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xmuea"]
-radius = 58.21512
+radius = 24.6123
 
 [node name="Helicopter" type="CharacterBody2D"]
 z_index = 10
+scale = Vector2(2.16, 2.08)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_xmuea")
+missile_scene = ExtResource("2_wncid")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_4loa8")
+texture = ExtResource("3_wncid")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.00515, 1)
 shape = SubResource("CircleShape2D_xmuea")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 7.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

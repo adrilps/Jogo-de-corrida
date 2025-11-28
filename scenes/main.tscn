@@ -27,18 +27,6 @@ position = Vector2(-825, 153)
 z_index = 1
 position = Vector2(-700, 450)
 rotation = -2.39059
-friction = null
-friction_brake_factor = null
-drag = null
-slip_speed = null
-steering_angle = null
-engine_power = null
-reverse_speed = null
-max_speed_reverse = null
-traction_fast = null
-traction_slow = null
-traction_brake = null
-traction_slipping = null
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = -965

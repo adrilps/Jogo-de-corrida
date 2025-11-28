@@ -123,6 +123,13 @@ func apply_forces(delta):
 	# Função que aplica efeito de perda de controle no veículo, chamado externamente
 func apply_debuff():
 	change_state("Slip")
+	
+func take_damage(amount: float):
+	current_fuel = clamp(current_fuel - amount, 0, max_fuel)
+	if current_state.name == "Empty":
+		current_state.exit()
+		current_state = state_machine.get_node("Idle")
+		current_state.enter()
 
 func refuel(amount: float):
 	current_fuel = clamp(current_fuel + amount, 0, max_fuel)
