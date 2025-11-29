@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://2x5lxynhh2cs"]
+
+[ext_resource type="PackedScene" uid="uid://blwvno0h5bli5" path="res://scenes/ui.tscn" id="1_v2lfg"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="UI" parent="." instance=ExtResource("1_v2lfg")]
+position = Vector2(115, 625)
+scale = Vector2(2.3146, 2.6027)

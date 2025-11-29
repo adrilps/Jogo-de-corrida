@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://blwvno0h5bli5"]
+
+[ext_resource type="Texture2D" uid="uid://dmab60p2b2caj" path="res://assets/speedometer.png" id="1_m6e0p"]
+[ext_resource type="Script" uid="uid://erxwkhme1a4d" path="res://Scripts/player/ui.gd" id="1_nltto"]
+[ext_resource type="Texture2D" uid="uid://cl8ja84gg462k" path="res://assets/needle.png" id="2_27fn8"]
+[ext_resource type="Script" uid="uid://dimta3keiqgnj" path="res://gas_needle.gd" id="4_ibotj"]
+
+[node name="UI" type="Node2D"]
+script = ExtResource("1_nltto")
+
+[node name="GasMeter" type="Sprite2D" parent="."]
+position = Vector2(148, 605)
+scale = Vector2(2.93, 2.76)
+texture = ExtResource("1_m6e0p")
+
+[node name="GasNeedle" type="Sprite2D" parent="."]
+position = Vector2(149, 624)
+rotation = 4.72328
+scale = Vector2(2.31065, 3.03559)
+texture = ExtResource("2_27fn8")
+offset = Vector2(2, -8)
+script = ExtResource("4_ibotj")
